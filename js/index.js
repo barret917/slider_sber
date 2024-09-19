@@ -27,10 +27,17 @@ function autoSlide() {
   autoSlideInterval = setInterval(() => {
     showSlide(currentSlide + 1);
   }, slideInterval);
+
+  if (!isPlaying) {
+    playButton.classList.add("active");
+    isPlaying = true;
+  }
 }
 
 function stopSlide() {
   clearInterval(autoSlideInterval);
+  playButton.classList.remove("active");
+  isPlaying = false;
 }
 
 function prevSlide() {
@@ -42,18 +49,6 @@ function nextSlide() {
   showSlide(currentSlide + 1);
   stopSlide();
 }
-
-playButton.addEventListener("click", function () {
-  if (!isPlaying) {
-    playButton.classList.add("active");
-    isPlaying = true;
-  }
-});
-
-stopButton.addEventListener("click", function () {
-  playButton.classList.remove("active");
-  isPlaying = false;
-});
 
 playButton.addEventListener("click", autoSlide);
 stopButton.addEventListener("click", stopSlide);
